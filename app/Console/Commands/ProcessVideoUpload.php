@@ -34,10 +34,10 @@ class ProcessVideoUpload extends Command
         $lowFormat  = (new X264('aac'))->setKiloBitrate(500);
         $highFormat = (new X264('aac'))->setKiloBitrate(1000);
 
-        $this->info('Converting redfield.mp4');
+        $this->info('Converting php_array.mp4');
 
         FFMpeg::fromDisk('uploads')
-            ->open('redfield.mp4')
+            ->open('php_array.mp4')
             ->exportForHLS()
             ->withRotatingEncryptionKey(function($filename,$contents){                
                 // Storage::disk('public')->put("videos/{$filename}",$contents);                
@@ -51,7 +51,7 @@ class ProcessVideoUpload extends Command
                 $this->info("Progress: {$progress}%");
             })
             ->toDisk('public')
-            ->save('videos/redfield.m3u8');
+            ->save('videos/php_array.m3u8');
 
         $this->info('Done!');
     }
